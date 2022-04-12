@@ -1,5 +1,7 @@
 package jenkins;
 
+import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -7,6 +9,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class UseJenkinsJob {
+
+    @Owner("ibesedin")
+    @Severity(SeverityLevel.CRITICAL)
+    @Feature("Jenkins integration")
+    @Story("Try to use Jenkins")
+    @DisplayName("Checking Issue tab in user's repository")
+    @Description("The test checks availability of the Issue tab in the user's repository")
+    @Link(url = "https://github.com")
 
     @Test
     public void testIssueLabel() {
