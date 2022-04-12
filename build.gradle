@@ -1,5 +1,5 @@
 plugins {
-    id 'java-library'
+    id 'java'
     id "io.qameta.allure" version "2.9.6"
 }
 
@@ -7,7 +7,7 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.17.2",
+def allureVersion = "2.17.3",
     junitVersion = "5.8.2"
 
 allure {
@@ -27,11 +27,11 @@ allure {
 
 dependencies {
     testImplementation(
-            "com.codeborne:selenide:6.2.1",
+            "com.codeborne:selenide:6.3.3",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly(
-            "org.slf4j:slf4j-simple:1.7.29",
+            'org.slf4j:slf4j-simple:1.7.36',
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 
@@ -40,7 +40,6 @@ tasks.withType(Test) {
 
     testLogging {
         lifecycle {
-//            events "started", "failed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
