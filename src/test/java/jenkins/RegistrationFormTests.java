@@ -52,9 +52,9 @@ public class RegistrationFormTests extends TestBase {
         //выбираем State and City
         $("#submit").scrollIntoView(true);
         $(byText("Select State")).click();
-        $(byText(state)).click();
+        $(byText(state)).scrollIntoView(true).click();
         $(byText("Select City")).click();
-        $(byText(city)).click();
+        $(byText(city)).scrollIntoView(true).click();
 
         //кликаем Submit
         $("#submit").click();
