@@ -14,7 +14,7 @@ public class TestData {
             year = "1999",
             hobbies = "Sports",
             attach = "JPEG.jpg",
-            state = "Haryana",
-            city = "Karnal",
+            state = "NCR",
+            city = "Delhi",
             subject = "Economics";
 }
