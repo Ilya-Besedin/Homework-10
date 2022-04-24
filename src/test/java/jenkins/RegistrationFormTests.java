@@ -2,6 +2,7 @@ package jenkins;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -21,6 +22,7 @@ public class RegistrationFormTests extends TestBase {
     @Link(url = "https://demoqa.com")
 
     @Test
+    @Tag("dev_test")
     void successFillTest() {
         step("Открыть форму регистрации", () -> {
             open("/automation-practice-form");
