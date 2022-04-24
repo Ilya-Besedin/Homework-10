@@ -22,7 +22,7 @@ public class TestBase {
 
         String browserSize = getProperty("browserSize", "414x896");
         Configuration.browserSize = browserSize;
-        //System.out.println(browserSize);
+        System.out.println(browserSize);
 
         //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         String user = getProperty("user", "user1");
