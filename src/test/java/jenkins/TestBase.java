@@ -20,13 +20,16 @@ public class TestBase {
         Configuration.baseUrl = "https://demoqa.com";
 
         String remoteBrowser = getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
+        String browserSize = getProperty("browserSize", "414x896");
 
-        Configuration.browserSize = getProperty("browserSize", "414x896");
+        Configuration.browserSize = browserSize;
+        //System.out.println(browserSize);
 
         //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         String user = getProperty("user", "user1");
         String password = getProperty("password", "1234");
         Configuration.remote = "https://" + user + ":" + password + "@" + remoteBrowser;
+        System.out.println(user + password + remoteBrowser);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
