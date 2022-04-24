@@ -14,15 +14,15 @@ public class RegistrationFormTests extends TestBase {
 
     @Owner("IBesedin")
     @Severity(value = SeverityLevel.CRITICAL)
-    @Feature("Registration form")
-    @Story("User registration")
-    @DisplayName("Verification of the complete filling of the registration form")
-    @Description("The test checks filling all fields of the registration form")
+    @Feature("Форма регистрации")
+    @Story("Регистрация пользователя")
+    @DisplayName("Проверка формы регистрации")
+    @Description("Проверка заполнения формы регистрация ожидаемыми данными")
     @Link(url = "https://demoqa.com")
 
     @Test
     void successFillTest() {
-        step("Откыть форму регистрации", () -> {
+        step("Открыть форму регистрации", () -> {
             open("/automation-practice-form");
             $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         });
