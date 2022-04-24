@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 import static jenkins.TestData.*;
 
 public class RegistrationFormTests extends TestBase {
@@ -20,46 +21,48 @@ public class RegistrationFormTests extends TestBase {
     @Link(url = "https://demoqa.com")
 
     @Test
-     void successFillTest() {
-        open("/automation-practice-form");
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+    void successFillTest() {
+        step("Откыть форму регистрации", () -> {
+            open("/automation-practice-form");
+            $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
+        });
 
-        //заполняем текстовые формы
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(lastName);
-        $("#userEmail").setValue(email);
-        $("#userNumber").setValue(phone);
-        $("#currentAddress").setValue(address);
+        step("Заполнить имя, фамилию, email, номер телефона и адрес", () -> {
+            $("#firstName").setValue(firstName);
+            $("#lastName").setValue(lastName);
+            $("#userEmail").setValue(email);
+            $("#userNumber").setValue(phone);
+            $("#currentAddress").setValue(address);
+        });
 
-        //отмечаем радиобаттоны и чекбоксы
-        $(byText(gender)).click();
-        // $(byText("Sports")).click();
-        $("#hobbies-checkbox-1").parent().click(); //другой вариант записи строки выше
+        step("Выбрать пол, хобби и предмет", () -> {
+            $(byText(gender)).click();
+            // $(byText("Sports")).click();
+            $("#hobbies-checkbox-1").parent().click(); //другой вариант записи строки выше
+            $("#subjectsInput").setValue(subject).pressEnter();
+        });
 
-        //выбираем изучаемый предмет
-        $("#subjectsInput").setValue(subject).pressEnter();
+        step("Выбрать пол, хобби и предмет", () -> {
+            $("#dateOfBirthInput").click();
+            //выбираем даты
+            $(".react-datepicker__year-select").selectOptionByValue(year);
+            $(".react-datepicker__month-select").selectOptionContainingText(month);
+            $(".react-datepicker__day--014:not(.react-datepicker__day--outside-month)").click(); //исключили повторяющиеся даты вне месяца
+        });
 
-        //дата-пикер
-        $("#dateOfBirthInput").click();
-        //выбираем даты
-        $(".react-datepicker__year-select").selectOptionByValue(year);
-        $(".react-datepicker__month-select").selectOptionContainingText(month);
-        $(".react-datepicker__day--014:not(.react-datepicker__day--outside-month)").click(); //исключили повторяющиеся даты вне месяца
+        step("Прикрепить файл", () -> $("#uploadPicture").uploadFromClasspath(attach));
 
-        //прикрепляем файл
-        $("#uploadPicture").uploadFromClasspath(attach);
+        step("Выбрать штат и город", () -> {
+            $("#submit").scrollIntoView(true);
+            $(byText("Select State")).click();
+            $(byText(state)).scrollIntoView(true).click();
+            $(byText("Select City")).click();
+            $(byText(city)).scrollIntoView(true).click();
+        });
 
-        //выбираем State and City
-        $("#submit").scrollIntoView(true);
-        $(byText("Select State")).click();
-        $(byText(state)).scrollIntoView(true).click();
-        $(byText("Select City")).click();
-        $(byText(city)).scrollIntoView(true).click();
+        step("Нажать Submit", () -> $("#submit").click());
 
-        //кликаем Submit
-        $("#submit").click();
-
-        //проверяем форму с результатом заполнения данных
+        step("Проверить введенные данные", () -> {
         $(".modal-header").shouldHave(text(tableHeader));
         $(".table-responsive").$(byText("Student Name"))
                 .parent().shouldHave(text(firstName + ' ' + lastName));
@@ -67,5 +70,6 @@ public class RegistrationFormTests extends TestBase {
                 text("Gender " + gender), text("Mobile " + phone), text("Date of Birth " + day + ' ' + month + ',' + year),
                 text("Subjects Economics"), text("Hobbies " + hobbies), text("Picture " + attach),
                 text("Address " + address), text("State and City " + state + ' ' + city));
+        });
     }
 }
