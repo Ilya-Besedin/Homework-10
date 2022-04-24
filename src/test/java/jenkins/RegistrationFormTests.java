@@ -42,7 +42,7 @@ public class RegistrationFormTests extends TestBase {
             $("#subjectsInput").setValue(subject).pressEnter();
         });
 
-        step("Выбрать пол, хобби и предмет", () -> {
+        step("Установить дату", () -> {
             $("#dateOfBirthInput").click();
             //выбираем даты
             $(".react-datepicker__year-select").selectOptionByValue(year);
