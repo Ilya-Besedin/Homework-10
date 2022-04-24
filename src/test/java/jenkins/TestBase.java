@@ -12,14 +12,14 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-    String remoteBrowser = System.getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
-    String browserSize = System.getProperty("browserSize", "414x896");
-    String remoteBrowserUser = System.getProperty("remoteBrowserUser");
-    String remoteBrowserPassword = System.getProperty("remoteBrowserPassword");
-
     @BeforeAll
-    void setUp() {
+    static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+
+        String remoteBrowser = System.getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
+        String browserSize = System.getProperty("browserSize", "414x896");
+        String remoteBrowserUser = System.getProperty("remoteBrowserUser");
+        String remoteBrowserPassword = System.getProperty("remoteBrowserPassword");
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = browserSize;
