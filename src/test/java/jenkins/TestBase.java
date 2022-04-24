@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static java.lang.System.getProperty;
 
 public class TestBase {
 
@@ -16,14 +17,15 @@ public class TestBase {
     static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
-        String remoteBrowser = System.getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
-        String browserSize = System.getProperty("browserSize", "414x896");
-        String remoteBrowserUser = System.getProperty("remoteBrowserUser");
-        String remoteBrowserPassword = System.getProperty("remoteBrowserPassword");
-
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = browserSize;
-        Configuration.remote = "https://" + remoteBrowserUser + ":" + remoteBrowserPassword + "@" + remoteBrowser;
+
+        String remoteBrowser = getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
+
+        Configuration.browserSize = getProperty("browserSize", "414x896");
+
+        String user = getProperty("user", "user1");
+        String password = getProperty("password", "1234");
+        Configuration.remote = "https://" + user + ":" + password + "@" + remoteBrowser;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
