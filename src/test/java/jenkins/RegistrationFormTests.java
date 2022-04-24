@@ -18,7 +18,13 @@ public class RegistrationFormTests extends TestBase {
     @Feature("Форма регистрации")
     @Story("Регистрация пользователя")
     @DisplayName("Проверка формы регистрации")
-    @Description("Проверка заполнения формы регистрация ожидаемыми данными")
+    @Description("Запуск в Jenkins clean\n" +
+            "test\n" +
+            "-Dbrowser=${BROWSER}\n" +
+            "-DbrowserSize=${BROWSER_SIZE}\n" +
+            "-DremoteBrowser=${REMOTE_BROWSER}\n" +
+            "-Duser=${USER}\n" +
+            "-Dpassword=${PASSWORD}")
     @Link(url = "https://demoqa.com")
 
     @Test
