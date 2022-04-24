@@ -22,14 +22,14 @@ public class TestBase {
 
         String browserSize = getProperty("browserSize", "414x896");
         Configuration.browserSize = browserSize;
-        System.out.println(browserSize);
+        //System.out.println(browserSize);
 
         //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         String user = getProperty("user", "user2");
         String password = getProperty("password", "1235");
         String remoteBrowser = getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
         Configuration.remote = "https://" + user + ":" + password + "@" + remoteBrowser;
-        System.out.println(user + password + remoteBrowser);
+        //System.out.println(user + password + remoteBrowser);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
