@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
+import static io.qameta.allure.Allure.step;
 import static java.lang.System.getProperty;
 
 public class TestBase {
@@ -17,24 +18,26 @@ public class TestBase {
     static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browser = System.getProperty("browser", "chrome");
+        step("Настроить тестируемую страницу", () -> {
+            Configuration.baseUrl = "https://demoqa.com";
+            Configuration.browser = System.getProperty("browser", "chrome");
 
-        String browserSize = getProperty("browserSize", "414x896");
-        Configuration.browserSize = browserSize;
-        //System.out.println(browserSize);
+            String browserSize = getProperty("browserSize", "414x896");
+            Configuration.browserSize = browserSize;
+            //System.out.println(browserSize);
 
-        //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        String user = getProperty("user", "user2");
-        String password = getProperty("password", "1235");
-        String remoteBrowser = getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
-        Configuration.remote = "https://" + user + ":" + password + "@" + remoteBrowser;
-        //System.out.println(user + password + remoteBrowser);
+            //Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+            String user = getProperty("user", "user2");
+            String password = getProperty("password", "1235");
+            String remoteBrowser = getProperty("remoteBrowser", "selenoid.autotests.cloud/wd/hub");
+            Configuration.remote = "https://" + user + ":" + password + "@" + remoteBrowser;
+            //System.out.println(user + password + remoteBrowser);
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("enableVNC", true);
+            capabilities.setCapability("enableVideo", true);
+            Configuration.browserCapabilities = capabilities;
+        });
     }
 
     @AfterEach
