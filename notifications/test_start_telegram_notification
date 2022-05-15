@@ -1,0 +1,34 @@
+// Template
+java \
+"-DprojectName=${PROJECT_NAME}" \
+"-Denv=${ENVIRONMENT}" \
+"-DreportLink=${BUILD_URL}" \
+"-Dcomm=test telegram notification" \
+"-Dconfig.file=${PATH_TO_FILE}" \
+-jar notifications/allure-notifications-4.1.jar
+
+// Local in multiple lines
+java \
+"-DprojectName=Local test run" \
+"-Denv=PROD" \
+"-DreportLink=qa.guru/" \
+"-Dcomm=test telegram notification" \
+"-Dconfig.file=notifications/telegram_config.json" \
+-jar notifications/allure-notifications-3.1.2.jar
+
+
+// Jenkins
+java \
+"-DprojectName=${PROJECT_NAME}" \
+"-Denv=${ENVIRONMENT}" \
+"-DreportLink=${BUILD_URL}" \
+"-Dcomm=test telegram notification" \
+"-Dconfig.file=notifications/telegram_config.json" \
+-jar notifications/allure-notifications-3.1.2.jar
+
+
+//Terminal send message command curl
+curl -X POST \
+     -H 'Content-Type: application/json' \
+     -d '{"chat_id": "-626128634", "text": "Terminal test"}' \
+     https://api.telegram.org/bot5295970288:AAHuRMXiJwP974z97j3mGpAu7dmFcviOwCA/sendMessage
